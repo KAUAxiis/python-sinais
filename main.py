@@ -98,7 +98,6 @@ def enviar_sinal():
     # Enviar a mensagem com a imagem do jogo e os botões
     with open(game_image, 'rb') as photo:
         bot.send_photo(chat_id=chat_id, photo=photo, caption=mensagem_sinal, parse_mode='HTML', reply_markup=markup)
-    print(f"[INFO] Mensagem de sinal enviada para o jogo '{game_name}'")
 
     ultimo_sinal['rodadas_normal'] = rodadas_normal
     ultimo_sinal['rodadas_turbo'] = rodadas_turbo
@@ -135,7 +134,6 @@ def enviar_resultado():
 
     # Enviar a mensagem de resultado
     bot.send_message(chat_id=chat_id, text=mensagem_resultado, parse_mode='HTML', reply_markup=markup)
-    print(f"[INFO] Mensagem de resultados enviada para o jogo '{ultimo_sinal['game_name']}'")
 
 # Função para enviar uma mensagem promocional
 def enviar_mensagem_promocional():
@@ -148,7 +146,6 @@ def enviar_mensagem_promocional():
     with open(image_path, 'rb') as photo:
         bot.send_photo(chat_id=chat_id, photo=photo, caption=mensagem_promocional, parse_mode='HTML')
 
-    print("[INFO] Mensagem promocional enviada.")
 
 # Função para agendar envio automático de mensagens promocionais a cada 10 minutos
 def agendar_mensagem_promocional():
@@ -156,7 +153,6 @@ def agendar_mensagem_promocional():
     def loop_agendamento():
         while True:
             if auto_registro:
-                print("[INFO] Enviando mensagem promocional...")
                 time.sleep(600)
                 enviar_mensagem_promocional()
     
@@ -176,7 +172,6 @@ def notificar_admin():
 def handle_command(message):
     if message.from_user.id != admin_id:
         bot.reply_to(message, "🚫 Comando recusado.")
-        print(f"[WARNING] Comando recusado para o usuário com ID: {message.from_user.id}")
         return
 
     if message.text == '/start':
@@ -188,7 +183,6 @@ def handle_command(message):
         
     elif message.text == '/stop':
         bot.reply_to(message, "🛑 O bot foi interrompido.")
-        print("[INFO] O bot foi interrompido.")
         exit()
 
     elif message.text == '/arke':
